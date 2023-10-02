@@ -352,7 +352,7 @@ class ApiController extends Controller
      *
      *          @OA\JsonContent(
      *
-     *               @OA\Examples(example="result", value={
+     *               example={
      *                  "all_pages": 2,
      *                  "current_page": 1,
      *                  "records_count": 13,
@@ -360,14 +360,13 @@ class ApiController extends Controller
      *                      {
      *                          "id": 1,
      *                          "user_id": 1,
-     *                          "address": "Украина, Киев, Шевченковский район, улица Богдана Хмельницкого, 11",
-     *                          "lat": "50.4452705",
-     *                          "lon": "30.5166187",
+     *                          "address": "Россия, Ульяновск, улица Гагарина, 15",
+     *                          "lat": "48.391973",
+     *                          "lon": "54.324167",
      *                          "created_at": "2023-10-02T04:26:39.000000Z",
      *                          "updated_at": "2023-10-02T04:26:39.000000Z"
      *                      }     
-     *               }, summary="Success"),
-     *               @OA\Examples(example="bool", value={"error":"lon or lat not valid"}, summary="Error")
+     *               }
      *          )
      *       ),
      *
@@ -377,7 +376,6 @@ class ApiController extends Controller
      */
     public function getLocation(Request $request)
     {
-        $errors = [];
         $page = $request->get('page', 1);
         $token = UserToken::where(['token' => $request->token, 'type' => 'access'])->first();
         abort_if(empty($token) || $token->isExpired(), Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
@@ -385,7 +383,7 @@ class ApiController extends Controller
         $locationsQuery = UserLocation::where([
             'user_id' => $user->id,
         ]);
-        if ($request->start_date && preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $request->start_date)) {
+        if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $request->start_date)) {
             $locationsQuery->where('created_at', '>=', date('Y-m-d 00:00:00', strtotime($request->start_date)));
         }
 
