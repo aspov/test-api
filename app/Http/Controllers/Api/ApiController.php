@@ -394,7 +394,9 @@ class ApiController extends Controller
         $allPages = ceil(($count / $limitPerPage));
         $page = (int) $request->get('page', 1);
         if ($allPages > 1 && $page <= $allPages) {
-            $locationsQuery->offset($page - 1)->limit($limitPerPage);
+            $locationsQuery->offset(($page - 1)*  $limitPerPage)->limit($limitPerPage);
+        } else {
+            $locationsQuery->limit($limitPerPage);
         }
         $result = [
             'all_pages' => $allPages,
