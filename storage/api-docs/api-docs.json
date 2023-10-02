@@ -1,0 +1,379 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel OpenApi Demo Documentation",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8001",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/register": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Register users",
+                "description": "Returns tokens",
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "example@mail.com"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Success",
+                                        "value": {
+                                            "access_token": "qwe123qwe",
+                                            "refresh_token": "qwe123ddd"
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "Error",
+                                        "value": {
+                                            "error": {
+                                                "password": "The password field confirmation does not match."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Login users",
+                "description": "Returns tokens",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "example@mail.com"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Success",
+                                        "value": {
+                                            "access_token": "qwe123qwe",
+                                            "refresh_token": "qwe123ddd"
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "Error",
+                                        "value": {
+                                            "error": {
+                                                "password": "The password field confirmation does not match."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/refresh": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Refresh tokens",
+                "description": "Returns tokens",
+                "operationId": "refresh",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "refresh token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "3bbO6y8cO0KHSqUxoSdj0A1wNS98CwLM8j5CgBXu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Success",
+                                        "value": {
+                                            "access_token": "qwe123qwe",
+                                            "refresh_token": "qwe123ddd"
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "Error",
+                                        "value": {
+                                            "error": {
+                                                "password": "The password field confirmation does not match."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/save-location": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Save user location",
+                "description": "Returns status of operation",
+                "operationId": "save-location",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "3bbO6y8cO0KHSqUxoSdj0A1wNS98CwLM8j5CgBXu"
+                        }
+                    },
+                    {
+                        "name": "lon",
+                        "in": "query",
+                        "description": "longitude",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "48.403131"
+                        }
+                    },
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "latitude",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "54.314194"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Success",
+                                        "value": {
+                                            "status": "success"
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "Error",
+                                        "value": {
+                                            "error": "lon or lat not valid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/get-location": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "summary": "Get users locations",
+                "description": "Returns the object with 10 location items per page",
+                "operationId": "get-location",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "3bbO6y8cO0KHSqUxoSdj0A1wNS98CwLM8j5CgBXu"
+                        }
+                    },
+                    {
+                        "name": "start-date",
+                        "in": "query",
+                        "description": "Start date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2023-10-01"
+                        }
+                    },
+                    {
+                        "name": "end-date",
+                        "in": "query",
+                        "description": "End date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2023-10-01"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "number of page",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Success",
+                                        "value": {
+                                            "all_pages": 2,
+                                            "current_page": 1,
+                                            "records_count": 13,
+                                            "items": {
+                                                "id": 1,
+                                                "user_id": 1,
+                                                "address": "Украина, Киев, Шевченковский район, улица Богдана Хмельницкого, 11",
+                                                "lat": "50.4452705",
+                                                "lon": "30.5166187",
+                                                "created_at": "2023-10-02T04:26:39.000000Z",
+                                                "updated_at": "2023-10-02T04:26:39.000000Z"
+                                            }
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "Error",
+                                        "value": {
+                                            "error": "lon or lat not valid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "api",
+            "description": "API routes"
+        }
+    ]
+}
