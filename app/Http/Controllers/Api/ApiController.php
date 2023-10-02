@@ -375,8 +375,7 @@ class ApiController extends Controller
      * )
      */
     public function getLocation(Request $request)
-    {
-        $page = $request->get('page', 1);
+    { 
         $token = UserToken::where(['token' => $request->token, 'type' => 'access'])->first();
         abort_if(empty($token) || $token->isExpired(), Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
         $user = $token->user;
@@ -393,7 +392,7 @@ class ApiController extends Controller
         $count = $locationsQuery->count();
         $limitPerPage = 10;
         $allPages = ceil(($count / $limitPerPage));
-        $page = (int) $request->page;
+        $page = (int) $request->get('page', 1);
         if ($allPages > 1 && $page <= $allPages) {
             $locationsQuery->offset($page - 1)->limit($limitPerPage);
         }
