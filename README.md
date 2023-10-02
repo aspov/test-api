@@ -26,7 +26,7 @@ php artisan serve --port=8001
 php artisan queue:work
 
 Swagger находится по адресу
-http://localhost:8000/api/documentation
+http://localhost:8001/api/documentation
 
 Документация
 storage/api-docs/api-docs.json
